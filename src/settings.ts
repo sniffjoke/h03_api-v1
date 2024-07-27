@@ -7,5 +7,6 @@ export const SETTINGS = {
     PATH: {
         VIDEOS: '/api/videos',
         TESTING: '/api/testing/all-data',
+        MONGODB: process.env.MONGO_URI
     }
 }

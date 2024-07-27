@@ -1,6 +1,8 @@
 import express from "express";
 import cors from "cors";
-import {SETTINGS} from "./settings";
+import {connectDB} from "../db/db";
+
+connectDB()
 
 export const app = express()
 app.use(express.json())
