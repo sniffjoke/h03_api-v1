@@ -1,6 +1,8 @@
 import express from "express";
 import cors from "cors";
 import {connectDB} from "../db/db";
+import {SETTINGS} from "./settings";
+import blogsRoutes from "./routers/blogsRoutes";
 
 connectDB()
 
@@ -12,7 +14,7 @@ app.get('/', (req, res) => {
     res.status(200).json({version: '1.0'})
 })
 
-// app.get(SETTINGS.PATH.VIDEOS, getVideoController)
-// app.use(express.urlencoded({extended: false}))
+app.use(express.urlencoded({extended: false}))
+app.use(SETTINGS.PATH.BLOGS, blogsRoutes)
 // app.use(SETTINGS.PATH.VIDEOS, videoRoutes)
 // app.use(SETTINGS.PATH.TESTING, testingRoutes)
