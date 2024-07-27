@@ -22,6 +22,24 @@ class BlogsController {
             next(e)
         }
     }
+
+    static getBlogById = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            const blog: Blog = await blogService.findBlogById(req.params.id);
+            res.status(200).json(blog);
+        } catch (e) {
+            next(e)
+        }
+    }
+
+    static updateBlog = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            await blogService.updateBlog(req.params.id, req.body);
+            res.status(204).send('Обновлено')
+        } catch (e) {
+            next(e)
+        }
+    }
 }
 
 export default BlogsController

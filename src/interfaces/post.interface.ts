@@ -4,4 +4,6 @@ export interface Post {
     shortDescription: string;
     content: string;
     blogId: string;
+    blogName: string;
+    created_at: string;
 }

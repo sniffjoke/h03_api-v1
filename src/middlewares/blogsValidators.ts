@@ -1,4 +1,5 @@
 import {body} from "express-validator";
+import blogService from "../services/blogService";
 
 
 export const nameBlogValidator = body('name')
@@ -16,3 +17,9 @@ export const websiteUrlValidator = body('websiteUrl')
     .trim()
     .isURL().withMessage('Введите валидный URL')
     .isLength({min: 1, max: 100}).withMessage('Количество знаков 1-100')
+
+export const idValidator = body('id')
+    .custom(blogId => {
+        const blog = blogService.findBlogById(blogId)
+        return !!blog
+    }).withMessage('Блог не найден!')

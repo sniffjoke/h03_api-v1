@@ -15,7 +15,7 @@ const postSchema: Schema = new Schema({
             type: String,
             required: true,
         },
-        blodId: {
+        blogId: {
             type: Schema.Types.ObjectId,
             required: true,
             ref: "Blog"
@@ -24,14 +24,10 @@ const postSchema: Schema = new Schema({
             type: String,
             required: true,
         },
-        isMembership: {
-            types: Boolean,
-            default: false
-        }
     },
     {
         timestamps: true
     }
 )
 
-const blogModel = model<Post & Document>('Post', postSchema);
+export const postModel = model<Post & Document>('Post', postSchema);

@@ -14,6 +14,10 @@ const blogSchema: Schema = new Schema({
         websiteUrl: {
             type: String,
             required: true,
+        },
+        isMembership: {
+            type: Boolean,
+            default: false
         }
     },
     {
