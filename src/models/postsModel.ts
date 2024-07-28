@@ -26,7 +26,10 @@ const postSchema: Schema = new Schema({
         },
     },
     {
-        timestamps: true
+        // timestamps: true,
+        timestamps: false,
+        versionKey: false,
+
     }
 )
 

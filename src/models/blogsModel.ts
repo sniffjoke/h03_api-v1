@@ -21,8 +21,8 @@ const blogSchema: Schema = new Schema({
         }
     },
     {
-        timestamps: true
-    }
+        versionKey: false
+    },
 )
 
 export const blogModel = model<Blog & Document>('Blog', blogSchema);
