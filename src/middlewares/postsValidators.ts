@@ -30,7 +30,6 @@ export const blogIdValidator = body('blogId')
 export const idPostValidator = param('id')
     .custom(async postId => {
         const post: Post | null = await postService.findPostById(postId)
-        console.log(postId)
         if (!post) {
             throw new Error('Not found')
         } else {
