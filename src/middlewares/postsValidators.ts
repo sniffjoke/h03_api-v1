@@ -23,7 +23,11 @@ export const blogIdValidator = body('blogId')
     .trim()
     .custom(async blogId => {
         const blog = await blogService.findBlogById(blogId)
+        if (blog) {
         return !!blog
+        } else {
+            throw new Error('Not found')
+        }
     }).withMessage('Блог не найден!')
     .isLength({min: 1})
 
