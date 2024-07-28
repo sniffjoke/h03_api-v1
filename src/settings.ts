@@ -8,6 +8,7 @@ export const SETTINGS = {
         BLOGS: '/api/blogs',
         POSTS: '/api/posts',
         TESTING: '/api/testing/all-data',
-        MONGODB: process.env.MONGO_URI
+        MONGODB: process.env.MONGO_URI,
+        ADMIN: process.env.ADMIN || 'admin:qwerty',
     }
 }

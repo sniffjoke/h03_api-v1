@@ -7,12 +7,14 @@ import {
     shortDescriptionPostValidator,
     titlePostValidator
 } from "../middlewares/postsValidators";
+import {authMiddleware} from "../middlewares/authMiddleware";
 
 const router = express.Router();
 
 router.route('/')
     .get(PostsController.getPosts)
     .post(
+        authMiddleware,
         titlePostValidator,
         shortDescriptionPostValidator,
         contentPostValidator,
@@ -28,6 +30,7 @@ router.route('/:id')
         PostsController.getPostById
     )
     .put(
+        authMiddleware,
         idPostValidator,
         titlePostValidator,
         shortDescriptionPostValidator,
@@ -37,6 +40,7 @@ router.route('/:id')
         PostsController.updatePost
     )
     .delete(
+        authMiddleware,
         idPostValidator,
         errorMiddleware,
         PostsController.deletePost
