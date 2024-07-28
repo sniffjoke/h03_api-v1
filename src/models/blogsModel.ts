@@ -21,7 +21,14 @@ const blogSchema: Schema = new Schema({
         }
     },
     {
-        versionKey: false
+        versionKey: false,
+        timestamps: {updatedAt: false},
+        toJSON: {
+            transform(doc, ret, options) {
+                ret.id = ret._id;
+                delete ret._id;
+            }
+        }
     },
 )
 

@@ -9,7 +9,8 @@ const postSchema: Schema = new Schema({
         },
         shortDescription: {
             type: String,
-            required: [true, 'Please add a text value']
+            required: true
+            // default: ''
         },
         content: {
             type: String,
@@ -18,11 +19,13 @@ const postSchema: Schema = new Schema({
         blogId: {
             type: Schema.Types.ObjectId,
             required: true,
+            // default: '',
             ref: "Blog"
         },
         blogName: {
             type: String,
-            required: true
+            // required: true
+            default: ''
         },
     },
     {
