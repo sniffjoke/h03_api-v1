@@ -18,7 +18,7 @@ export const errorMiddleware = (req: Request, res: Response<OutputErrorsType>, n
         console.log(eArray)
         res
             // .status(eArray && eArray[0].path === 'name' ? 400 : 404)
-            .status(eArray && eArray.find(x => x.path === '_id') ? 404 : 400)
+            .status(eArray && eArray.find(x => x.msg === 'Блог с заданным id не найден!') ? 404 : 400)
             .json({
                 errorsMessages: eArray.map(x => ({field: x.path, message: x.msg}))
             })
