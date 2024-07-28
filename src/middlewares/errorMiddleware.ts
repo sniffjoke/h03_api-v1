@@ -18,7 +18,7 @@ export const errorMiddleware = (req: Request, res: Response<OutputErrorsType>, n
 
         res
             // .status(eArray && eArray[0].path === 'name' ? 400 : 404)
-            .status(eArray && eArray.find(x => x.path === 'name') ? 400 : 404)
+            .status(eArray && eArray.find(x => x.path === 'name' || 'websiteUrl') ? 400 : 404)
             .json({
                 errorsMessages: eArray.map(x => ({field: x.path, message: x.msg}))
             })
