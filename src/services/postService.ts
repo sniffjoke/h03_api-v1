@@ -1,7 +1,6 @@
 import {Post} from "../interfaces/post.interface";
 import {postModel} from "../models/postsModel";
 import {CreateBlogDto} from "../dtos/blogs.dto";
-import {blogModel} from "../models/blogsModel";
 import { DeleteResult } from "mongodb";
 
 
@@ -29,7 +28,7 @@ class postService {
 
     static async deletePost(postId: string): Promise<DeleteResult> {
         const post = await this.findPostById(postId)
-        const deletePost = await blogModel.deleteOne({_id: postId})
+        const deletePost = await postModel.deleteOne({_id: postId})
         return deletePost
     }
 }
