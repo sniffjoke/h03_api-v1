@@ -22,7 +22,7 @@ const postSchema: Schema = new Schema({
         },
         blogName: {
             type: String,
-            required: true,
+            required: true
         },
     },
     {

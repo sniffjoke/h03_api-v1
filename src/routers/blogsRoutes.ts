@@ -1,8 +1,7 @@
 import express from "express";
 import BlogsController from "../controllers/blogsController";
 import {
-    descriptionBlogValidator,
-    idValidator,
+    descriptionBlogValidator, idBlogValidator,
     nameBlogValidator,
     websiteUrlValidator
 } from "../middlewares/blogsValidators";
@@ -21,14 +20,23 @@ router.route('/')
     )
 
 router.route('/:id')
-    .get(BlogsController.getBlogById)
+    .get(
+        idBlogValidator,
+        errorMiddleware,
+        BlogsController.getBlogById
+    )
     .put(
-        idValidator,
+        idBlogValidator,
         nameBlogValidator,
         descriptionBlogValidator,
         websiteUrlValidator,
         errorMiddleware,
         BlogsController.updateBlog
+    )
+    .delete(
+        idBlogValidator,
+        errorMiddleware,
+        BlogsController.deleteBlog
     )
 
 export default router;

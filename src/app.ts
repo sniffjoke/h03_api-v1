@@ -3,6 +3,7 @@ import cors from "cors";
 import {connectDB} from "../db/db";
 import {SETTINGS} from "./settings";
 import blogsRoutes from "./routers/blogsRoutes";
+import postsRoutes from "./routers/postsRoutes";
 
 connectDB()
 
@@ -16,5 +17,6 @@ app.get('/', (req, res) => {
 
 app.use(express.urlencoded({extended: false}))
 app.use(SETTINGS.PATH.BLOGS, blogsRoutes)
+app.use(SETTINGS.PATH.POSTS, postsRoutes)
 // app.use(SETTINGS.PATH.VIDEOS, videoRoutes)
 // app.use(SETTINGS.PATH.TESTING, testingRoutes)

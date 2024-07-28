@@ -1,4 +1,4 @@
-import {body} from "express-validator";
+import {body, param} from "express-validator";
 import blogService from "../services/blogService";
 
 
@@ -18,8 +18,12 @@ export const websiteUrlValidator = body('websiteUrl')
     .isURL().withMessage('Введите валидный URL')
     .isLength({min: 1, max: 100}).withMessage('Количество знаков 1-100')
 
-export const idValidator = body('id')
-    .custom(blogId => {
-        const blog = blogService.findBlogById(blogId)
-        return !!blog
-    }).withMessage('Блог не найден!')
+export const idBlogValidator = param('id')
+    .custom(async blogId => {
+        const blog = await blogService.findBlogById(blogId)
+        if (!blog) {
+            throw new Error('Not found')
+        } else {
+            return !!blog
+        }
+    }).withMessage('Блог с заданным id не найден!')

@@ -2,6 +2,7 @@ import {Blog} from "../interfaces/blog.interface";
 import {blogModel} from "../models/blogsModel";
 import {NextFunction} from "express";
 import {CreateBlogDto} from "../dtos/blogs.dto";
+import {DeleteResult} from "mongodb";
 
 
 class blogService {
@@ -15,16 +16,21 @@ class blogService {
         return createBlogData
     }
 
-    static async findBlogById(blogId: string): Promise<Blog> {
-        console.log(blogId)
-        const blog: any = await blogModel.findOne({_id: blogId})
+    static async findBlogById(blogId: string): Promise<Blog | null> {
+        const blog = await blogModel.findOne({_id: blogId})
         return blog
     }
 
-    static async updateBlog(blogId: string, blog: Blog): Promise<Blog> {
-        const findedBlog = await this.findBlogById(blogId)
-        const updateBlog: any = await blogModel.findByIdAndUpdate( blogId, {...blog})
+    static async updateBlog(blogId: string, blog: Blog): Promise<Blog | null> {
+        const findedBlog  = await this.findBlogById(blogId)
+        const updateBlog = await blogModel.findByIdAndUpdate( blogId, {...blog})
         return updateBlog
+    }
+
+    static async deleteBlog(blogId: string): Promise<DeleteResult> {
+        const blog = await this.findBlogById(blogId)
+        const deleteBlog = await blogModel.deleteOne({_id: blogId})
+        return deleteBlog
     }
 }
 

@@ -25,7 +25,7 @@ class BlogsController {
 
     static getBlogById = async (req: Request, res: Response, next: NextFunction) => {
         try {
-            const blog: Blog = await blogService.findBlogById(req.params.id);
+            const blog = await blogService.findBlogById(req.params.id);
             res.status(200).json(blog);
         } catch (e) {
             next(e)
@@ -35,7 +35,16 @@ class BlogsController {
     static updateBlog = async (req: Request, res: Response, next: NextFunction) => {
         try {
             await blogService.updateBlog(req.params.id, req.body);
-            res.status(204).send('Обновлено')
+            res.status(204).send('Обновлено!')
+        } catch (e) {
+            next(e)
+        }
+    }
+
+    static deleteBlog = async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            await blogService.deleteBlog(req.params.id);
+            res.status(204).send('Удалено')
         } catch (e) {
             next(e)
         }

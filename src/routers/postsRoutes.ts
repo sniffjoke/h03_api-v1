@@ -1,11 +1,9 @@
 import express from "express";
-import BlogsController from "../controllers/blogsController";
-import {descriptionBlogValidator, nameBlogValidator, websiteUrlValidator} from "../middlewares/blogsValidators";
 import {errorMiddleware} from "../middlewares/errorMiddleware";
 import PostsController from "../controllers/postsController";
 import {
     blogIdValidator,
-    contentPostValidator,
+    contentPostValidator, idPostValidator,
     shortDescriptionPostValidator,
     titlePostValidator
 } from "../middlewares/postsValidators";
@@ -18,9 +16,30 @@ router.route('/')
         titlePostValidator,
         shortDescriptionPostValidator,
         contentPostValidator,
-        errorMiddleware,
         blogIdValidator,
+        errorMiddleware,
         PostsController.createPost
+    )
+
+router.route('/:id')
+    .get(
+        idPostValidator,
+        errorMiddleware,
+        PostsController.getPostById
+    )
+    .put(
+        idPostValidator,
+        titlePostValidator,
+        shortDescriptionPostValidator,
+        contentPostValidator,
+        blogIdValidator,
+        errorMiddleware,
+        PostsController.updatePost
+    )
+    .delete(
+        idPostValidator,
+        errorMiddleware,
+        PostsController.deletePost
     )
 
 export default router;

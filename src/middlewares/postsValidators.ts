@@ -1,5 +1,7 @@
-import {body} from "express-validator";
+import {body, param} from "express-validator";
 import blogService from "../services/blogService";
+import {Post} from "../interfaces/post.interface";
+import postService from "../services/postService";
 
 export const titlePostValidator = body('title')
     .isString().withMessage('Должно быть строковым значением')
@@ -19,9 +21,21 @@ export const shortDescriptionPostValidator = body('shortDescription')
 export const blogIdValidator = body('blogId')
     .isString().withMessage('Должно быть строковым значением')
     .trim()
-    .custom(blogId => {
-        const blog = blogService.findBlogById(blogId)
+    .custom(async blogId => {
+        const blog = await blogService.findBlogById(blogId)
         return !!blog
     }).withMessage('Блог не найден!')
     .isLength({min: 1})
+
+export const idPostValidator = param('id')
+    .custom(async postId => {
+        const post: Post | null = await postService.findPostById(postId)
+        console.log(postId)
+        if (!post) {
+            throw new Error('Not found')
+        } else {
+            return !!post
+        }
+        // return !!blog
+    }).withMessage('Пост с заданным id не найден!')
 
